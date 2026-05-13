@@ -79,7 +79,12 @@ func main() {
 			*flagConfig = append(*flagConfig, "config.json")
 		} else {
 			// Both Linux and macOS use the same XDG-style config path.
-			*flagConfig = append(*flagConfig, filepath.Join(os.Getenv("HOME"), ".config", "v2ray", "config.json"))
+			// Also support XDG_CONFIG_HOME if set, falling back to ~/.config.
+			configHome := os.Getenv("XDG_CONFIG_HOME")
+			if configHome == "" {
+				configHome = filepath.Join(os.Getenv("HOME"), ".config")
+			}
+			*flagConfig = append(*flagConfig, filepath.Join(configHome, "v2ray", "config.json"))
 		}
 	}
 
