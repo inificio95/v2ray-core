@@ -72,10 +72,14 @@ func main() {
 
 	if len(*flagConfig) == 0 {
 		// Default config file location.
+		// Personal note: using ~/.config/v2ray/config.json as default on Linux
+		// instead of /etc/v2ray/config.json so it works without root privileges.
 		if runtime.GOOS == "windows" {
 			*flagConfig = append(*flagConfig, "config.json")
+		} else if runtime.GOOS == "darwin" {
+			*flagConfig = append(*flagConfig, filepath.Join(os.Getenv("HOME"), ".config", "v2ray", "config.json"))
 		} else {
-			*flagConfig = append(*flagConfig, "/etc/v2ray/config.json")
+			*flagConfig = append(*flagConfig, filepath.Join(os.Getenv("HOME"), ".config", "v2ray", "config.json"))
 		}
 	}
 
