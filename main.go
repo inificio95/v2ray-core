@@ -117,5 +117,5 @@ func main() {
 	osSignals := make(chan os.Signal, 1)
 	signal.Notify(osSignals, syscall.SIGINT, syscall.SIGTERM)
 	<-osSignals
-	fmt.Println("\nShutting down V2Ray...")
+	fmt.Println("Shutting down V2Ray...")
 }
