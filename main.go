@@ -111,11 +111,11 @@ func main() {
 	}
 	defer server.Close()
 
-	// Wait for termination signal.
-	osSignals := make(chan os.Signal, 1)
-	signal.Notify(osSignals, os.Interrupt, syscall.SIGTERM)
-	<-osSignals
-	fmt.Println("V2Ray is shutting down...")
-}
+	fmt.Printf("V2Ray %s started.\n", Version)
 
-// prin
+	// Wait for termination signal (SIGINT or SIGTERM).
+	sigCh := make(chan os.Signal, 1)
+	signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
+	<-sigCh
+	fmt.Println("Shutting down V2Ray...")
+}
