@@ -74,11 +74,11 @@ func main() {
 		// Default config file location.
 		// Personal note: using ~/.config/v2ray/config.json as default on Linux
 		// instead of /etc/v2ray/config.json so it works without root privileges.
+		// On macOS, also prefer XDG-style path over ~/Library/Application Support.
 		if runtime.GOOS == "windows" {
 			*flagConfig = append(*flagConfig, "config.json")
-		} else if runtime.GOOS == "darwin" {
-			*flagConfig = append(*flagConfig, filepath.Join(os.Getenv("HOME"), ".config", "v2ray", "config.json"))
 		} else {
+			// Both Linux and macOS use the same XDG-style config path.
 			*flagConfig = append(*flagConfig, filepath.Join(os.Getenv("HOME"), ".config", "v2ray", "config.json"))
 		}
 	}
@@ -113,8 +113,4 @@ func main() {
 	fmt.Println("V2Ray is shutting down...")
 }
 
-// printVersion prints the current version information.
-func printVersion() {
-	fmt.Printf("V2Ray %s (%s/%s)\n", Version, runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("A unified platform for anti-censorship.\n")
-}
+// prin
