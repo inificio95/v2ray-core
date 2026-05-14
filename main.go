@@ -111,7 +111,7 @@ func main() {
 	}
 	defer server.Close()
 
-	fmt.Printf("V2Ray %s started.\n", Version)
+	fmt.Printf("V2Ray %s started\n", Version)
 
 	// Wait for termination signal (SIGINT or SIGTERM).
 	osSignals := make(chan os.Signal, 1)
