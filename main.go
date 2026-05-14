@@ -115,7 +115,7 @@ func main() {
 
 	// Wait for termination signal (SIGINT or SIGTERM).
 	osSignals := make(chan os.Signal, 1)
-	signal.Notify(osSignals, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(osSignals, syscall.SIGINT, syscall.SIGTERM)
 	<-osSignals
 	fmt.Println("V2Ray shutting down.")
 }
